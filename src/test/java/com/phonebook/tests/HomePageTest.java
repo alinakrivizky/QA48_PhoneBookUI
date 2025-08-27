@@ -14,7 +14,7 @@ public class HomePageTest extends TestBase{
         Assert.assertTrue(isHomeComponentPresent()); //assert is important for tests to not allow logic failures at all
 
     }
-    public boolean isHomeComponentPresent(){
-        return isElementPresent(By.cssSelector("div:nth-child(2)>div>div>h1"));//false
+    public boolean isHomeComponentPresent() {
+        return isHomeComponentPresent(By.cssSelector("div:nth-child(2)>div>div>h1"));
     }
 }

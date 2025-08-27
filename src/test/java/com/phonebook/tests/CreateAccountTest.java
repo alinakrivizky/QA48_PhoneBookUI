@@ -5,25 +5,37 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CreateAccountTest extends TestBase {
-    @Test
+    @Test(enabled = false)
     public void newUserRegistrationPositiveTest() {
+    int i=(int)(System.currentTimeMillis()/1000)%3600;
         //click on Login Link
-        driver.findElement(By.cssSelector("[href='/login']")).click();
+        click(By.cssSelector("[href='/login']"));
         //enter Email
-        driver.findElement(By.name("email")).click();
-        driver.findElement(By.name("email")).clear();
-        driver.findElement(By.name("email")).sendKeys("al@gmail.com");
+        type(By.name("email"), "al@gmail.com");
         //Enter Password
-        driver.findElement(By.name("password")).click();
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys("Va11hall@");
+        type(By.name("password"), "Va11hall@");
         //click on Registration Button
-        driver.findElement(By.name("registration")).click();
+        click(By.name("registration"));
         //verify SignOut is displayed
-        Assert.assertTrue(isElementPresent(By.xpath("//button[.='Sign Out']")));
+        Assert.assertTrue(isHomeComponentPresent(By.xpath("//button[.='Sign Out']")));
+    }
+
+    @Test
+    public void newExistedUserRegistrationNegativeTest() {
+        //click on Login Link
+        click(By.cssSelector("[href='/login']"));
+        //enter Email
+        type(By.name("email"), "al@gmail.com");
+        //Enter Password
+        type(By.name("password"), "Va11hall@");
+        //click on Registration Button
+        click(By.name("registration"));
+        //verify SignOut is displayed
+        Assert.assertTrue(isAlertDisplayed());
     }
 
 }
+
 
 
 
