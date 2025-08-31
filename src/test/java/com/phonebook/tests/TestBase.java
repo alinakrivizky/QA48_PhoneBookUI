@@ -3,13 +3,15 @@ package com.phonebook.tests;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.time.Duration;
+import java. time.Duration;
+import java.util.List;
 
 public class TestBase {
     WebDriver driver;
@@ -34,10 +36,14 @@ public class TestBase {
         return driver.findElements(locator).size() > 0;
     }
 
-    protected void type(By locator, String text) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+    public void type(By locator, String text) {
+        if (text!=null) {
+
+
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
     }
 
     public void click(By locator) {
@@ -53,6 +59,61 @@ public class TestBase {
         } else {
             return true;
         }
+    }
+
+    public void clickOnRegisterButton() {
+        click(By.name("registration"));
+    }
+
+    public void fillRegisterForm(User user) {
+        type(By.name("email"), user.getEmail());
+        type(By.name("password"), user.getPassword());
+    }
+
+    public void clickOnLoginLink() {
+        click(By.cssSelector("[href='/login']"));
+    }
+
+    public void clickOnAddButton() {
+        click(By.cssSelector("[href='/add']"));
+    }
+
+    public void fillContactForm(Contact contact) {
+        //enter name
+        type(By.cssSelector("input:nth-child(1)"), contact.getName());
+        //enter lastname
+        type(By.cssSelector("input:nth-child(2)"), contact.getLastName());
+        //enter phonenumber
+        type(By.cssSelector("input:nth-child(3)"), contact.getPhone());
+        //enter email
+        type(By.cssSelector("input:nth-child(4)"), contact.getEmail());
+        //enter address
+        type(By.cssSelector("input:nth-child(5)"), contact.getAddress());
+        //enter description
+        type(By.cssSelector("input:nth-child(6)"), contact.getDescription());
+
+    }
+
+    public void clickOnSaveButton() {
+        click(By.cssSelector(".add_main__1tbl_ button"));
+    }
+
+    public boolean isContactAdded(String text) {
+        List<WebElement> contacts = driver.findElements(By.cssSelector("h3"));
+        for (WebElement contact: contacts) {
+            if (contact.getText().contains(text))
+                return true;
+        }
+        return false;
+    }
+
+    public void clickOnLoginButton() {
+        click(By.name("login"));
+    }
+
+    public void deleteContact() {
+        click(By.cssSelector(".contact-item_card__2SOIM"));//.contact-item-detailed_card__50dTS
+        click(By.xpath("//button[.='Remove']"));
     }
 }
 
