@@ -15,6 +15,6 @@ public class HomePageTest extends TestBase{
 
     }
     public boolean isHomeComponentPresent() {
-        return isHomeComponentPresent(By.cssSelector("div:nth-child(2)>div>div>h1"));
+        return app.getHome().isHomeComponentPresent(By.cssSelector("div:nth-child(2)>div>div>h1"));
     }
 }

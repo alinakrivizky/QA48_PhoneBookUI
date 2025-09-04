@@ -1,21 +1,22 @@
 package com.phonebook.tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import phonebook.models.Contact;
+import phonebook.models.User;
 
 public class DeleteContact extends TestBase {
     @BeforeMethod
     public void preconditions() {
-        clickOnLoginLink();
-        fillRegisterForm(new User().setEmail("al@gmail.com").setPassword("Va11hall@"));
-        clickOnLoginButton();
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillRegisterForm(new User().setEmail("al@gmail.com").setPassword("Va11hall@"));
+        app.getUser().clickOnLoginButton();
 
         String phone = "0567891221";  // сохраняем телефон для проверки и удаления
 
-        clickOnAddButton();
-        fillContactForm(
+        app.getContact().clickOnAddButton();
+        app.getContact().fillContactForm(
                 new Contact().setName("Alan")
                         .setLastName("Krivizky")
                         .setPhone(phone)
@@ -23,26 +24,20 @@ public class DeleteContact extends TestBase {
                         .setAddress("Rotshild 4, Herzliya")
                         .setDescription("QA"));
 
-        clickOnSaveButton();
+        app.getContact().clickOnSaveButton();
 
         // Проверяем, что контакт добавлен
-        Assert.assertTrue(isContactAdded(phone));
+        Assert.assertTrue(app.getContact().isContactAdded(phone));
     }
     @Test
     public void deleteContactTest(){
-        int sizeBefore = sizeOfContact();
+        int sizeBefore = app.getContact().sizeOfContact();
                 //click on the cart
-        deleteContact();
+        app.getContact().deleteContact();
 
-        int sizeAfter = sizeOfContact();
+        int sizeAfter = app.getContact().sizeOfContact();
         Assert.assertEquals(sizeAfter,sizeBefore-1);
     }
 
-    public int sizeOfContact(){
-        if (isElementPresent (By.cssSelector(".contact-item_card__2SOIM"))){
-            return driver.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
-    }
-    return 0;
-}
 }
 

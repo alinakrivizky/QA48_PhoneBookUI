@@ -1,18 +1,19 @@
 package com.phonebook.tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import phonebook.models.Contact;
+import phonebook.models.User;
 
 public class AddContactTest extends TestBase {
     //pre-condition login
     @BeforeMethod
     public void preconditions() {
-        clickOnLoginLink();
-        fillRegisterForm(new User().setEmail("al@gmail.com").setPassword("Va11hall@"));
-        clickOnLoginButton();
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillRegisterForm(new User().setEmail("al@gmail.com").setPassword("Va11hall@"));
+        app.getUser().clickOnLoginButton();
     }
 
     @Test
@@ -21,22 +22,22 @@ public class AddContactTest extends TestBase {
         // сохранили в переменную
 
         //click on link ADD
-        clickOnAddButton();
-        fillContactForm(new Contact().setName("Alan")
+        app.getContact().clickOnAddButton();
+        app.getContact().fillContactForm(new Contact().setName("Alan")
                 .setLastName("Krivizky")
                 .setPhone(phone)
                 .setEmail("al2012@gmail.com")
                         .setAddress("Rotshild 4, Herzliya")
                 .setDescription("QA"));
-        clickOnSaveButton();
+        app.getContact().clickOnSaveButton();
 
-        Assert.assertTrue(isContactAdded(phone));
+        Assert.assertTrue(app.getContact().isContactAdded(phone));
 
     }
 
     @AfterMethod
     public void postconditions() {
-        deleteContact();
+        app.getContact().deleteContact();
 
     }
 }
