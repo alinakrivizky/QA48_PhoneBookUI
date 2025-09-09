@@ -5,8 +5,14 @@ import org.openqa.selenium.WebDriver;
 import phonebook.models.User;
 
 public class UserHelper extends BaseHelper {
+
     public UserHelper(WebDriver driver) {
         super(driver);
+    }
+
+    // Исправленный метод
+    public boolean isLoginLinkPresent() {
+        return isElementPresent(By.cssSelector("[href='/login']"));
     }
 
     public void clickOnRegisterButton() {
@@ -26,7 +32,16 @@ public class UserHelper extends BaseHelper {
         click(By.name("login"));
     }
 
-    public boolean isErrorMessagePresent(){
-    return isElementPresent(By.cssSelector(".login_login__3EHKB>div"));
+    public boolean isErrorMessagePresent() {
+        return isElementPresent(By.cssSelector(".login_login__3EHKB>div"));
+    }
+
+    public void clickOnSignOutButton() {
+
+    }
+
+    public boolean isSingOutPresent() {
+        return isElementPresent(By.xpath("//button[.='Sign Out']"));
     }
 }
+

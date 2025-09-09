@@ -1,19 +1,27 @@
 package com.phonebook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import phonebook.models.User;
 
-public class CreateAccountTest extends TestBase {
+public class CreateAccountTest extends TestBase{
     SoftAssert softAssert = new SoftAssert();
+    @BeforeMethod
+    public void ensurePrecondition(){
+        if(!app.getUser().isLoginLinkPresent()){
+            app.getUser().clickOnSignOutButton();
+        }
+
+    }
     @Test(enabled = false)
     public void newUserRegistrationPositiveTest() {
     //int i=(int)(System.currentTimeMillis()/1000)%3600;
         app.getUser().clickOnLoginLink();
         app.getUser().fillRegisterForm(new User().setEmail("al@gmail.com").setPassword("Va11hall@"));
         app.getUser().clickOnRegisterButton();
-        Assert.assertTrue(app.getUser().isAlertDisplayed());
+        Assert.assertTrue(app.getUser().isSingOutPresent());
 
 
     }

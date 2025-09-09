@@ -17,19 +17,12 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void fillContactForm(Contact contact) {
-        //enter name
         type(By.cssSelector("input:nth-child(1)"), contact.getName());
-        //enter lastname
         type(By.cssSelector("input:nth-child(2)"), contact.getLastName());
-        //enter phonenumber
         type(By.cssSelector("input:nth-child(3)"), contact.getPhone());
-        //enter email
         type(By.cssSelector("input:nth-child(4)"), contact.getEmail());
-        //enter address
         type(By.cssSelector("input:nth-child(5)"), contact.getAddress());
-        //enter description
         type(By.cssSelector("input:nth-child(6)"), contact.getDescription());
-
     }
 
     public void clickOnSaveButton() {
@@ -56,4 +49,5 @@ public class ContactHelper extends BaseHelper {
         }
         return 0;
     }
+
 }

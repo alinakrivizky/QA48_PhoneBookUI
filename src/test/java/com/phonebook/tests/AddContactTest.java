@@ -11,6 +11,9 @@ public class AddContactTest extends TestBase {
     //pre-condition login
     @BeforeMethod
     public void preconditions() {
+        if(!app.getUser().isLoginLinkPresent()){
+            app.getUser().clickOnSignOutButton();
+        }
         app.getUser().clickOnLoginLink();
         app.getUser().fillRegisterForm(new User().setEmail("al@gmail.com").setPassword("Va11hall@"));
         app.getUser().clickOnLoginButton();
@@ -18,20 +21,20 @@ public class AddContactTest extends TestBase {
 
     @Test
     public void addContactPositiveTest() {
-        String phone = "05" + (10000000 + (int)(Math.random() * 90000000));  // уникальный телефон
+        //String phone = "05" + (10000000 + (int)(Math.random() * 90000000));  // уникальный телефон
         // сохранили в переменную
 
         //click on link ADD
         app.getContact().clickOnAddButton();
         app.getContact().fillContactForm(new Contact().setName("Alan")
                 .setLastName("Krivizky")
-                .setPhone(phone)
+                .setPhone("0546738294")
                 .setEmail("al2012@gmail.com")
                         .setAddress("Rotshild 4, Herzliya")
                 .setDescription("QA"));
         app.getContact().clickOnSaveButton();
 
-        Assert.assertTrue(app.getContact().isContactAdded(phone));
+        Assert.assertTrue(app.getContact().isContactAdded("0546738294"));
 
     }
 

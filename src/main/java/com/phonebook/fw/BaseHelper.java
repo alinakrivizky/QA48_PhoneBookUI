@@ -45,4 +45,12 @@ public class BaseHelper {
             return true;
         }
     }
+    public void pause(int millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
