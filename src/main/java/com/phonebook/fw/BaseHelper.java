@@ -1,11 +1,12 @@
 package com.phonebook.fw;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 public class BaseHelper {
@@ -20,7 +21,7 @@ public class BaseHelper {
     }
 
     public void type(By locator, String text) {
-        if (text!=null) {
+        if (text != null) {
 
 
             click(locator);
@@ -30,8 +31,8 @@ public class BaseHelper {
     }
 
     public void click(By locator) {
-       new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator))
-               .click();
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator))
+                .click();
     }
 
     public boolean isAlertDisplayed() {
@@ -45,12 +46,26 @@ public class BaseHelper {
             return true;
         }
     }
-    public void pause(int millis){
+
+    public void pause(int millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public String takeScreenShot() {
+        File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File screenshot = new File("screenshots/screen-" + System.currentTimeMillis() + ".png");
+        try {
+            Files.copy(tmp, screenshot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return screenshot.getAbsolutePath();
+    }
 }
+
+
 

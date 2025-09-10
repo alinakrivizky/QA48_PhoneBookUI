@@ -12,7 +12,9 @@ repositories {
 dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.26.0'
     testImplementation 'org.testng:testng:7.11.0'
-    implementation 'org.slf4j:slf4j-simple:2.0.9' // для логов
+    //implementation 'org.slf4j:slf4j-simple:2.0.9' // для логов
+    implementation 'ch.qos.logback:logback-classic:1.5.18'
+
 }
 
 test {
@@ -27,10 +29,13 @@ task qa(type:Test) {
         useTestNG() {
             def suite1 = project.hasProperty("suite1")
             def suite2 = project.hasProperty("suite2")
+            def suite3 = project.hasProperty("suite3")
             if (suite1) {
                 suites 'src/test/resources/testng.xml'
             } else if (suite2) {
                 suites 'src/test/resources/smoky.xml'
+            } else if (suite3){
+                suites 'scr/test/resources/negative.xml'
             }
         }
         if (project.hasProperty('browser')) {

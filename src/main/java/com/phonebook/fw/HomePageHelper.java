@@ -11,11 +11,10 @@ public class HomePageHelper extends BaseHelper {
 
     // Метод проверяет наличие Home компонента
     public boolean isHomeComponentPresent() {
-        // используем фиксированный селектор внутри helper
         return isElementPresent(By.cssSelector("div:nth-child(2)>div>div>h1"));
     }
 
-    // Клик по Home ссылке
+
     public void clickOnHomelink() {
         click(By.cssSelector("[href='/home']"));
     }
