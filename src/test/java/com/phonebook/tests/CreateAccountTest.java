@@ -22,7 +22,7 @@ public class CreateAccountTest extends TestBase{
         app.getUser().clickOnLoginLink();
         app.getUser().fillRegisterForm(new User().setEmail(UserData.EMAIL).setPassword(UserData.PASSWORD));
         app.getUser().clickOnRegisterButton();
-        Assert.assertTrue(app.getUser().isSingOutPresent());
+        Assert.assertTrue(app.getUser().isSignOutButtonPresent());
 
 
     }

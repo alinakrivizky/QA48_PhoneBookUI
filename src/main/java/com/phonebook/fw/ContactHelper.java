@@ -26,12 +26,12 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void clickOnSaveButton() {
-        click(By.cssSelector(".add_main__1tbl_ button"));
+        click(By.cssSelector(".add_form__2rsm2 button"));
     }
 
     public boolean isContactAdded(String text) {
         List<WebElement> contacts = driver.findElements(By.cssSelector("h3"));
-        for (WebElement contact : contacts) {
+        for (WebElement contact: contacts) {
             if (contact.getText().contains(text))
                 return true;
         }
