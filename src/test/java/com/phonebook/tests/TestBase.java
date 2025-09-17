@@ -16,8 +16,6 @@ import java.util.Arrays;
 public class TestBase {
  Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-    @BeforeSuite
-    public void setup() {}
     protected ApplicationManager app = new ApplicationManager(System.getProperty
             ("browser", Browser.CHROME.browserName()));
 

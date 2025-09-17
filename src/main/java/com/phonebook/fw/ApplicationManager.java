@@ -4,10 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.MyListener;
 
 import java.time.Duration;
+import java.util.logging.LogManager;
 
 public class ApplicationManager{
+    Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
     String browser;
     WebDriver driver;
   UserHelper user;
@@ -22,11 +29,16 @@ public class ApplicationManager{
     public void init() {
         if(browser.equalsIgnoreCase("chrome")) {
             driver = new ChromeDriver();
+            logger.info("Test started in Chrome browser");
         }else if(browser.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
+            logger.info("Test started in Safari browser");
         }
+        WebDriverListener listener=new MyListener();
+        driver=new EventFiringDecorator<>(listener).decorate(driver);
 
         driver.get("https://telranedu.web.app");
+        logger.info("Current url is" +driver.getCurrentUrl());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
