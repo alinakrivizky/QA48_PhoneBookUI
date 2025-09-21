@@ -2,6 +2,7 @@ package com.phonebook.fw;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import utils.MyListener;
 
 import java.time.Duration;
+import java.util.logging.LogManager;
 
 public class ApplicationManager{
     Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
